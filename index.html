@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>ToDoList</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+  <div class="card">
+    <div class="card__header">
+      <img src="./img/X2oObC4.png" />
+    </div>
+    <!-- <h2>hello!</h2> -->
+    <div class="card__body">
+      <div class="card__content">
+        <div class="card__title">
+          <h2>My Tasks</h2>
+          <p>September 9,2020</p>
+        </div>
+        <div class="card__add">
+          <input id="newTask" type="text" placeholder="Enter an activity..." />
+          <button id="addItem">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+        <div id="notiInput" class="alert-danger" style="display: none"></div>
+        <div class="card__todo">
+          <div id="warningNoti" class="bg-warning bg-opacity-50 text-danger mt-3 rounded py-1 px-3"
+            style="font-size: 13px; display: none;"></div>
+          <!-- Uncompleted tasks -->
+          <ul class="todo" id="todo"></ul>
+          <div id="totalToDo" class="bg-info bg-opacity-25
+            text-secondary p-1 px-1 text-center"
+            style="display: none; font-size: 12px; width:70%;
+            margin: 0 auto;"></div>
+          <!-- Completed tasks -->
+          <ul class="todo" id="completed" style="padding-bottom: 0;"></ul>
+          <div id="totalCompleted"  class="bg-success bg-opacity-10
+            text-success p-1 px-1 text-center"
+             style="display: none; font-size: 12px;
+             width:70%;margin: 0 auto; margin-bottom: 20px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+
+  <script>
+    $(function () {
+      $(".toggle-btn").click(function () {
+        $(".filter-btn").toggleClass("open");
+      });
+
+      $(".filter-btn a").click(function () {
+        $(".filter-btn").removeClass("open");
+      });
+    });
+  </script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
