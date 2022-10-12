@@ -176,4 +176,49 @@ document.getElementById('addItem').onclick = function () {
     createNewToDoTask(input);
     document.getElementById('warningNoti').style.display = 'none';
 };
+function sortASC() {
+    var sortArr = [];
+    for (var i = 0; i < list.arr.length; i++) {
+        if (list.arr[i].status == statusOptions[0]) {
+            var deletedTask = document.getElementById("TaskID" + list.arr[i].id);
+            document.getElementById('todo').removeChild(deletedTask);
+            sortArr.push(list.arr[i].taskName);
+        }
+    }
+    for (var i = 0; i < sortArr.length; i++) {
+        for (var j = 0; j < sortArr.length; j++) {
+            if (sortArr[j] > sortArr[i]) {
+                var swap = sortArr[j];
+                sortArr[j] = sortArr[i];
+                sortArr[i] = swap;
+            }
+        }
+    }
+    for (var i = 0; i < sortArr.length; i++) {
+        createNewToDoTask(sortArr[i]);
+    }
+}
+
+function sortDES() {
+    var sortArr = [];
+    for (var i = 0; i < list.arr.length; i++) {
+        if (list.arr[i].status == statusOptions[0]) {
+            var deletedTask = document.getElementById("TaskID" + list.arr[i].id);
+            document.getElementById('todo').removeChild(deletedTask);
+            sortArr.push(list.arr[i].taskName);
+        }
+    }
+    for (var i = 0; i < sortArr.length; i++) {
+        for (var j = 0; j < sortArr.length; j++) {
+            if (sortArr[j] < sortArr[i]) {
+                var swap = sortArr[j];
+                sortArr[j] = sortArr[i];
+                sortArr[i] = swap;
+            }
+        }
+    }
+    for (var i = 0; i < sortArr.length; i++) {
+        createNewToDoTask(sortArr[i]);
+    }
+}
 
