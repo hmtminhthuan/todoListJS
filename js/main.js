@@ -1,3 +1,4 @@
+
 class validation {
     constructor() { }
 
@@ -54,6 +55,7 @@ class TaskList {
 }
 
 var list = new TaskList();
+layDataLocalStorage();
 function printNumberOfTodo() {
     var count = 0;
     for (var i = 0; i < list.arr.length; i++) {
@@ -81,7 +83,9 @@ function printNumberOfCompleted() {
 function createNewToDoTask(input) {
     var inputTask;
     if (list._findIndexByName(input) >= 0) {
-        inputTask = list.arr[list._findIndexByName(input)];
+        var pos = list._findIndexByName(input);
+        inputTask = list.arr[pos];
+        if (inputTask.status == statusOptions[1]) { createNewCompletedTask(pos); return; }
         inputTask.status = statusOptions[0];
     }
     else { inputTask = new Task(list.arr.length, input, statusOptions[0]); list.addTask(inputTask); }
@@ -101,6 +105,7 @@ function createNewToDoTask(input) {
     document.getElementById('todo').appendChild(newToDoTask);
     printNumberOfTodo();
     printNumberOfCompleted();
+    luuLocalStorage();
 }
 
 function createNewCompletedTask(pos) {
@@ -126,6 +131,7 @@ function createNewCompletedTask(pos) {
     document.getElementById('completed').appendChild(newCompletedTask);
     printNumberOfTodo();
     printNumberOfCompleted();
+    luuLocalStorage();
 }
 
 function removeToDoEvent(id) {
@@ -135,6 +141,7 @@ function removeToDoEvent(id) {
     document.getElementById('todo').removeChild(deletedTask);
     printNumberOfTodo();
     printNumberOfCompleted();
+    luuLocalStorage();
 }
 function removeCompletedEvent(id) {
     document.getElementById('warningNoti').style.display = 'none';
@@ -144,6 +151,7 @@ function removeCompletedEvent(id) {
     list.deleteTask(list._findIndex(id));
     printNumberOfTodo();
     printNumberOfCompleted();
+    luuLocalStorage();
 }
 function completeDoEvent(id) {
     document.getElementById('warningNoti').style.display = 'none';
@@ -151,6 +159,7 @@ function completeDoEvent(id) {
     createNewCompletedTask(list._findIndex(id));
     var deletedTask = document.getElementById("TaskID" + id);
     document.getElementById('todo').removeChild(deletedTask);
+    luuLocalStorage();
 }
 
 function unCompletedDoEvent(id) {
@@ -175,6 +184,7 @@ document.getElementById('addItem').onclick = function () {
     }
     createNewToDoTask(input);
     document.getElementById('warningNoti').style.display = 'none';
+    luuLocalStorage();
 };
 function sortASC() {
     var sortArr = [];
@@ -219,6 +229,22 @@ function sortDES() {
     }
     for (var i = 0; i < sortArr.length; i++) {
         createNewToDoTask(sortArr[i]);
+    }
+}
+
+function luuLocalStorage() {
+    if (list.arr.length > 0) {
+        var str = JSON.stringify(list.arr);
+        localStorage.setItem('list', str);
+    }
+}
+function layDataLocalStorage() {
+    if (localStorage.getItem('list')) {
+        var str = localStorage.getItem('list');
+        list.arr = JSON.parse(str);
+        for (var i = 0; i < list.arr.length; i++) {
+            createNewToDoTask(list.arr[i].taskName);
+        }
     }
 }
 
